@@ -4,20 +4,13 @@ type IncidentCardProps = {
 
 export default function IncidentCard(props: IncidentCardProps) {
   const { incident } = props;
-  const {
-    _path,
-    title,
-    componentsAffected,
-    identified,
-    resolved,
-    severity,
-    steps,
-  } = incident;
+  const { title, componentsAffected, identified, resolved, severity, steps } =
+    incident;
   const status = resolved ? "resolved" : "ongoing";
 
   return (
     <>
-      <div key={_path} className="collapse bg-base-200 mt-4">
+      <div className="collapse bg-base-200 mt-4">
         <input type="checkbox" />
         <div className="collapse-title flex justify-between pr-4">
           {title}
