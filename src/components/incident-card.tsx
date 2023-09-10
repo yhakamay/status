@@ -17,8 +17,8 @@ export default function IncidentCard(props: IncidentCardProps) {
 
   return (
     <>
-      <div key={_path} className="collapse collapse-plus bg-base-200 mt-4">
-        <input type="radio" aria-label="toggle" />
+      <div key={_path} className="collapse collapse-arrow bg-base-200 mt-4">
+        <input type="checkbox" />
         <div className="collapse-title">
           {title}{" "}
           <span
