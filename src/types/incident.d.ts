@@ -5,5 +5,5 @@ type Incident = {
     identified: string;
     resolved: string;
     severity: string;
-    steps: any[];
+    steps: IncidentStep[];
 };
