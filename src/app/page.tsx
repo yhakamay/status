@@ -100,7 +100,25 @@ export default async function Home() {
               className="collapse collapse-plus bg-base-200 mt-4"
             >
               <input type="radio" aria-label="toggle" />
-              <div className="collapse-title text-lg">{title}</div>
+              <div className="collapse-title">
+                {title}{" "}
+                <span
+                  className={`badge badge-md ${
+                    severity === "major"
+                      ? "badge-error"
+                      : severity === "minor"
+                      ? "badge-warning"
+                      : "badge-info"
+                  }`}
+                >
+                  {severity}
+                </span>
+                {resolved && (
+                  <span className={`badge badge-md badge-success ml-1`}>
+                    {status}
+                  </span>
+                )}
+              </div>
               <div className="collapse-content">
                 {componentsAffected !== (null || undefined) && (
                   <p className="opacity-70">
