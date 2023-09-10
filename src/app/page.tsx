@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import IncidentCard from "@/components/incident-card";
 import OverallStatus from "@/components/overall-status";
 
 export default async function Home() {
@@ -37,76 +38,7 @@ export default async function Home() {
           countPotential={countPotential}
         />
         {incidents.map((incident) => {
-          const {
-            _path,
-            title,
-            componentsAffected,
-            identified,
-            resolved,
-            severity,
-            steps,
-          } = incident;
-          const status = resolved ? "resolved" : "ongoing";
-
-          return (
-            <div
-              key={_path}
-              className="collapse collapse-plus bg-base-200 mt-4"
-            >
-              <input type="radio" aria-label="toggle" />
-              <div className="collapse-title">
-                {title}{" "}
-                <span
-                  className={`badge badge-md ${
-                    severity === "major"
-                      ? "badge-error"
-                      : severity === "minor"
-                      ? "badge-warning"
-                      : "badge-info"
-                  }`}
-                >
-                  {severity}
-                </span>
-                {resolved && (
-                  <span className={`badge badge-md badge-success ml-1`}>
-                    {status}
-                  </span>
-                )}
-              </div>
-              <div className="collapse-content">
-                {componentsAffected !== (null || undefined) && (
-                  <p className="opacity-70">
-                    Component(s) affected: {componentsAffected.join(", ")}
-                  </p>
-                )}
-                {identified !== (null || undefined) && (
-                  <p className="opacity-70">
-                    Identified: {new Date(identified).toLocaleString()}
-                  </p>
-                )}
-                {resolved !== (null || undefined) && (
-                  <p className="opacity-70">
-                    Resolved:{" "}
-                    {resolved ? new Date(resolved).toLocaleString() : "-"}
-                  </p>
-                )}
-                <ul className="steps steps-vertical opacity-70">
-                  <li className="step">
-                    Identified ({new Date(identified).toLocaleString()})
-                  </li>
-                  {steps.map((step, index) => {
-                    return (
-                      <li key={index} className="step">
-                        {step.summary}{" "}
-                        {step.occurred &&
-                          `(${new Date(step.occurred).toLocaleString()})`}
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </div>
-          );
+          return <IncidentCard key={incident._path} incident={incident} />;
         })}
       </main>
     </>
