@@ -138,7 +138,7 @@ export default async function Home() {
                 )}
                 <ul className="steps steps-vertical opacity-70">
                   <li className="step">
-                    Issue identified ({new Date(identified).toLocaleString()})
+                    Identified ({new Date(identified).toLocaleString()})
                   </li>
                   {steps.map((step) => {
                     return (
