@@ -95,7 +95,10 @@ export default async function Home() {
           const status = resolved ? "resolved" : "ongoing";
 
           return (
-            <div key={_path} className="collapse collapse-plus bg-base-200">
+            <div
+              key={_path}
+              className="collapse collapse-plus bg-base-200 mt-4"
+            >
               <input type="radio" aria-label="toggle" />
               <div className="collapse-title text-lg">{title}</div>
               <div className="collapse-content">
