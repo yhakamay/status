@@ -14,6 +14,15 @@ export default function IncidentCard(props: IncidentCardProps) {
     steps,
   } = incident;
   const status = resolved ? "resolved" : "ongoing";
+  steps.sort((a, b) => {
+    if (a.occurred < b.occurred) {
+      return -1;
+    }
+    if (a.occurred > b.occurred) {
+      return 1;
+    }
+    return 0;
+  });
 
   return (
     <>
