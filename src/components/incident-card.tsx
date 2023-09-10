@@ -23,6 +23,16 @@ export default function IncidentCard(props: IncidentCardProps) {
     timeZoneName: "short",
   } satisfies Intl.DateTimeFormatOptions;
 
+  steps.sort((a, b) => {
+    if (a.occurred < b.occurred) {
+      return -1;
+    }
+    if (a.occurred > b.occurred) {
+      return 1;
+    }
+    return 0;
+  });
+
   return (
     <>
       <div key={_path} className="collapse bg-base-200 mt-4">
