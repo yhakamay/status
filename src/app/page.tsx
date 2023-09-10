@@ -125,12 +125,6 @@ export default async function Home() {
                     Component(s) affected: {componentsAffected.join(", ")}
                   </p>
                 )}
-                {status !== (null || undefined) && (
-                  <p className="opacity-70">Status: {status}</p>
-                )}
-                {severity !== (null || undefined) && (
-                  <p className="opacity-70">Severity: {severity}</p>
-                )}
                 {identified !== (null || undefined) && (
                   <p className="opacity-70">
                     Identified: {new Date(identified).toLocaleString()}
