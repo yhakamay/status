@@ -1,31 +1,65 @@
 import Link from "next/link";
 
-export default function Home() {
+import IncidentCard from "@/components/incident-card";
+import OverallStatus from "@/components/overall-status";
+
+export default async function Home() {
+  const incidents: Incident[] = await fetchIncidents();
+  incidents.sort((a, b) => {
+    if (a.identified < b.identified) {
+      return 1;
+    }
+    if (a.identified > b.identified) {
+      return -1;
+    }
+    return 0;
+  });
+  const countMajor = incidents.filter(
+    (incident) => incident.severity === "major" && !incident.resolved
+  ).length;
+  const countMinor = incidents.filter(
+    (incident) => incident.severity === "minor" && !incident.resolved
+  ).length;
+  const countPotential = incidents.filter(
+    (incident) => incident.severity === "potential" && !incident.resolved
+  ).length;
+
   return (
     <>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-100" role="navigation">
         <Link href="/" className="btn btn-ghost normal-case text-xl">
           yhakamay status
         </Link>
       </div>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <div className="alert alert-success">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="stroke-current shrink-0 h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          <span>All systems operational</span>
-        </div>
+      <main className="flex min-h-screen max-w-screen-lg flex-col items-center p-12 md:p-24">
+        <OverallStatus
+          countMajor={countMajor}
+          countMinor={countMinor}
+          countPotential={countPotential}
+        />
+        {incidents.map((incident) => {
+          return <IncidentCard key={incident._path} incident={incident} />;
+        })}
       </main>
     </>
   );
+}
+
+async function fetchIncidents(): Promise<Incident[]> {
+  const res = await fetch(`${process.env.GRAPHQL_ENDPOINT}/incidents-all`, {
+    next: {
+      revalidate: 60 * 60,
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error(
+      `Failed to fetch incidents: ${res.status} ${res.statusText}`
+    );
+  }
+
+  const json = await res.json();
+  const incidents = json.data.incidentList.items;
+
+  return incidents;
 }
