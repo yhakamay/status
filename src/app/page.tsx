@@ -143,9 +143,9 @@ export default async function Home() {
                   {steps.map((step, index) => {
                     return (
                       <li key={index} className="step">
-                        {step.summary}
+                        {step.summary}{" "}
                         {step.occurred &&
-                          new Date(step.occurred).toLocaleString()}
+                          `(${new Date(step.occurred).toLocaleString()})`}
                       </li>
                     );
                   })}
