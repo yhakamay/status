@@ -92,7 +92,7 @@ export default async function Home() {
             severity,
             steps,
           } = incident;
-          const status = resolved ? "ongoing" : "resolved";
+          const status = resolved ? "resolved" : "ongoing";
 
           return (
             <div key={_path} className="collapse collapse-plus bg-base-200">
