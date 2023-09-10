@@ -28,7 +28,7 @@ export default async function Home() {
     <>
       <div className="navbar bg-base-100" role="navigation">
         <Link href="/" className="btn btn-ghost normal-case text-xl">
-          yhakamay status
+          Yusuke&apos;s Status
         </Link>
       </div>
       <main className="flex min-h-screen max-w-screen-lg flex-col items-center p-12 md:p-24">
