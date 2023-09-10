@@ -4,9 +4,8 @@ type IncidentCardProps = {
 
 export default function IncidentCard(props: IncidentCardProps) {
   const { incident } = props;
-  const { title, componentsAffected, identified, resolved, severity, steps } =
-    incident;
-  const status = resolved ? "resolved" : "ongoing";
+  const { title, componentsAffected, identified, severity, steps } = incident;
+  const resolved = steps.find((step) => step.resolves)?.occurred;
   const dateTimeOptions = {
     year: "numeric",
     month: "short",

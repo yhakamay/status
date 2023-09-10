@@ -1,5 +1,6 @@
 type IncidentStep = {
     summary: string;
+    resolves: boolean;
     notes: Notes;
     occurred: string;
 };
