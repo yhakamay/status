@@ -23,7 +23,7 @@ export default async function Home() {
 
   return (
     <>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-100" role="navigation">
         <Link href="/" className="btn btn-ghost normal-case text-xl">
           yhakamay status
         </Link>
