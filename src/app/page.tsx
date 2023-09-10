@@ -38,11 +38,14 @@ export default async function Home() {
         </Link>
       </div>
       <main className="flex min-h-screen max-w-screen-lg flex-col items-center p-6 md:p-24">
-        <OverallStatus
-          countMajor={countMajor}
-          countMinor={countMinor}
-          countPotential={countPotential}
-        />
+        {countMajor > 0 && <OverallStatus type="major" count={countMajor} />}
+        {countMinor > 0 && <OverallStatus type="minor" count={countMinor} />}
+        {countPotential > 0 && (
+          <OverallStatus type="potential" count={countPotential} />
+        )}
+        {incidents.length === 0 && (
+          <OverallStatus type="operational" count={incidents.length} />
+        )}
         {incidents.map((incident) => {
           return <IncidentCard key={incident._path} incident={incident} />;
         })}

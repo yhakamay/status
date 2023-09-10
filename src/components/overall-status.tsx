@@ -1,16 +1,15 @@
 export type OverallStatusProps = {
-  countMajor: number;
-  countMinor: number;
-  countPotential: number;
+  type: "major" | "minor" | "potential" | "operational";
+  count: number;
 };
 
 export default function OverallStatus(props: OverallStatusProps) {
-  const { countMajor, countMinor, countPotential } = props;
+  const { type, count } = props;
 
-  if (countMajor > 0) {
+  if (type === "major") {
     return (
       <>
-        <div className="alert alert-error">
+        <div className="alert alert-error mb-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="stroke-current shrink-0 h-6 w-6"
@@ -25,19 +24,18 @@ export default function OverallStatus(props: OverallStatusProps) {
             />
           </svg>
           <span>
-            There {countMajor > 1 ? "are" : "is"} currently {countMajor} open
-            major incident
-            {countMajor > 1 ? "s" : ""}
+            There {count > 1 ? "are" : "is"} {count} open major incident
+            {count > 1 ? "s" : ""}
           </span>
         </div>
       </>
     );
   }
 
-  if (countMinor > 0) {
+  if (type === "minor") {
     return (
       <>
-        <div className="alert alert-warning">
+        <div className="alert alert-warning mb-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="stroke-current shrink-0 h-6 w-6"
@@ -52,19 +50,18 @@ export default function OverallStatus(props: OverallStatusProps) {
             />
           </svg>
           <span>
-            There {countMajor > 1 ? "are" : "is"} {countMinor} open minor
-            incident
-            {countMinor > 1 ? "s" : ""}
+            There {count > 1 ? "are" : "is"} {count} open minor incident
+            {count > 1 ? "s" : ""}
           </span>
         </div>
       </>
     );
   }
 
-  if (countPotential > 0) {
+  if (type === "potential") {
     return (
       <>
-        <div className="alert alert-info">
+        <div className="alert alert-info mb-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -79,32 +76,34 @@ export default function OverallStatus(props: OverallStatusProps) {
             ></path>
           </svg>
           <span>
-            There {countMajor > 1 ? "are" : "is"} {countPotential} open
-            potential incident{countPotential > 1 ? "s" : ""}
+            There {count > 1 ? "are" : "is"} {count} open potential incident
+            {count > 1 ? "s" : ""}
           </span>
         </div>
       </>
     );
   }
 
-  return (
-    <>
-      <div className="alert alert-success">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="stroke-current shrink-0 h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        <span>All systems operational</span>
-      </div>
-    </>
-  );
+  if (type === "operational") {
+    return (
+      <>
+        <div className="alert alert-success mb-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="stroke-current shrink-0 h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span>All systems operational</span>
+        </div>
+      </>
+    );
+  }
 }
