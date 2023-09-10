@@ -14,6 +14,15 @@ export default function IncidentCard(props: IncidentCardProps) {
     steps,
   } = incident;
   const status = resolved ? "resolved" : "ongoing";
+  const dateTimeOptions = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    timeZoneName: "short",
+  } satisfies Intl.DateTimeFormatOptions;
+
   steps.sort((a, b) => {
     if (a.occurred < b.occurred) {
       return -1;
@@ -57,24 +66,32 @@ export default function IncidentCard(props: IncidentCardProps) {
           )}
           {identified !== (null || undefined) && (
             <p className="opacity-70">
-              Identified: {new Date(identified).toLocaleString()}
+              Identified:{" "}
+              {new Date(identified).toLocaleString("en-US", dateTimeOptions)}
             </p>
           )}
           {resolved !== (null || undefined) && (
             <p className="opacity-70">
-              Resolved: {resolved ? new Date(resolved).toLocaleString() : "-"}
+              Resolved:{" "}
+              {resolved
+                ? new Date(resolved).toLocaleString("en-US", dateTimeOptions)
+                : "-"}
             </p>
           )}
           <ul className="steps steps-vertical opacity-70">
             <li className="step">
-              Identified ({new Date(identified).toLocaleString()})
+              Identified (
+              {new Date(identified).toLocaleString("en-US", dateTimeOptions)})
             </li>
             {steps.map((step, index) => {
               return (
                 <li key={index} className="step">
                   {step.summary}{" "}
                   {step.occurred &&
-                    `(${new Date(step.occurred).toLocaleString()})`}
+                    `(${new Date(step.occurred).toLocaleString(
+                      "en-US",
+                      dateTimeOptions
+                    )})`}
                 </li>
               );
             })}
