@@ -140,10 +140,12 @@ export default async function Home() {
                   <li className="step">
                     Identified ({new Date(identified).toLocaleString()})
                   </li>
-                  {steps.map((step) => {
+                  {steps.map((step, index) => {
                     return (
-                      <li key={step._path} className="step">
-                        {step}
+                      <li key={index} className="step">
+                        {step.summary}
+                        {step.occurred &&
+                          new Date(step.occurred).toLocaleString()}
                       </li>
                     );
                   })}
