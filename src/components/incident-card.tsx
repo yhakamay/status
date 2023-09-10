@@ -17,26 +17,28 @@ export default function IncidentCard(props: IncidentCardProps) {
 
   return (
     <>
-      <div key={_path} className="collapse collapse-arrow bg-base-200 mt-4">
+      <div key={_path} className="collapse bg-base-200 mt-4">
         <input type="checkbox" />
-        <div className="collapse-title">
-          {title}{" "}
-          <span
-            className={`badge badge-md ${
-              severity === "major"
-                ? "badge-error"
-                : severity === "minor"
-                ? "badge-warning"
-                : "badge-info"
-            }`}
-          >
-            {severity}
-          </span>
-          {resolved && (
-            <span className={`badge badge-md badge-success ml-1`}>
-              {status}
+        <div className="collapse-title flex justify-between pr-4">
+          {title}
+          <div>
+            <span
+              className={`badge badge-md ml-2 ${
+                severity === "major"
+                  ? "badge-error"
+                  : severity === "minor"
+                  ? "badge-warning"
+                  : "badge-info"
+              }`}
+            >
+              {severity}
             </span>
-          )}
+            {resolved && (
+              <span className={`badge badge-md badge-success ml-1`}>
+                {status}
+              </span>
+            )}
+          </div>
         </div>
         <div className="collapse-content">
           {componentsAffected !== (null || undefined) && (

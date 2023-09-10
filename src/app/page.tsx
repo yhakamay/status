@@ -31,7 +31,7 @@ export default async function Home() {
           Yusuke&apos;s Status
         </Link>
       </div>
-      <main className="flex min-h-screen max-w-screen-lg flex-col items-center p-12 md:p-24">
+      <main className="flex min-h-screen max-w-screen-lg flex-col items-center p-6 md:p-24">
         <OverallStatus
           countMajor={countMajor}
           countMinor={countMinor}
