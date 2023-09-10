@@ -2,6 +2,24 @@ import Link from "next/link";
 
 export default async function Home() {
   const incidents: Incident[] = await fetchIncidents();
+  incidents.sort((a, b) => {
+    if (a.identified < b.identified) {
+      return 1;
+    }
+    if (a.identified > b.identified) {
+      return -1;
+    }
+    return 0;
+  });
+  const countMajor = incidents.filter(
+    (incident) => incident.severity === "major" && !incident.resolved
+  ).length;
+  const countMinor = incidents.filter(
+    (incident) => incident.severity === "minor" && !incident.resolved
+  ).length;
+  const countPotential = incidents.filter(
+    (incident) => incident.severity === "potential" && !incident.resolved
+  ).length;
 
   return (
     <>
