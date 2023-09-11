@@ -1,8 +1,6 @@
-type Incident = {
-    _path: string;
-    title: string;
-    componentsAffected: string[];
-    identified: string;
-    severity: string;
-    steps: IncidentStep[];
+type Incident = LifeActivity & {
+  scope: string[];
+  severity: "minor" | "major" | "potential";
+  end: string | null;
+  steps: string[] | null;
 };
