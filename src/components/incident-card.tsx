@@ -4,8 +4,8 @@ type IncidentCardProps = {
 
 export default function IncidentCard(props: IncidentCardProps) {
   const { incident } = props;
-  const { title, componentsAffected, identified, severity, steps } = incident;
-  const resolved = steps.find((step) => step.resolves)?.occurred;
+  const { title, scope, start, end, severity, steps } = incident;
+  const resolved = end !== null;
   const dateTimeOptions = {
     year: "numeric",
     month: "short",
@@ -14,16 +14,6 @@ export default function IncidentCard(props: IncidentCardProps) {
     minute: "numeric",
     timeZoneName: "short",
   } satisfies Intl.DateTimeFormatOptions;
-
-  steps.sort((a, b) => {
-    if (a.occurred < b.occurred) {
-      return -1;
-    }
-    if (a.occurred > b.occurred) {
-      return 1;
-    }
-    return 0;
-  });
 
   return (
     <>
@@ -61,42 +51,31 @@ export default function IncidentCard(props: IncidentCardProps) {
           </span>
         </div>
         <div className="collapse-content">
-          {componentsAffected !== (null || undefined) && (
-            <p className="opacity-70">
-              Component(s) affected: {componentsAffected.join(", ")}
-            </p>
+          {scope !== (null || undefined) && (
+            <p className="opacity-70">Scope: {scope.join(", ")}</p>
           )}
-          {identified !== (null || undefined) && (
+          {start !== (null || undefined) && (
             <p className="opacity-70">
               Identified:{" "}
-              {new Date(identified).toLocaleString("en-US", dateTimeOptions)}
+              {new Date(start).toLocaleString("en-US", dateTimeOptions)}
             </p>
           )}
           {resolved !== (null || undefined) && (
             <p className="opacity-70">
               Resolved:{" "}
               {resolved
-                ? new Date(resolved).toLocaleString("en-US", dateTimeOptions)
+                ? new Date(end).toLocaleString("en-US", dateTimeOptions)
                 : "-"}
             </p>
           )}
           <ul className="steps steps-vertical opacity-70">
-            <li className="step">
-              Identified (
-              {new Date(identified).toLocaleString("en-US", dateTimeOptions)})
-            </li>
-            {steps.map((step, index) => {
-              return (
+            <li className="step">Issue identified</li>
+            {steps &&
+              steps.map((step, index) => (
                 <li key={index} className="step">
-                  {step.summary}{" "}
-                  {step.occurred &&
-                    `(${new Date(step.occurred).toLocaleString(
-                      "en-US",
-                      dateTimeOptions
-                    )})`}
+                  {step}
                 </li>
-              );
-            })}
+              ))}
           </ul>
         </div>
       </div>

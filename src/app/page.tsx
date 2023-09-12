@@ -6,28 +6,22 @@ import OverallStatus from "@/components/overall-status";
 export default async function Home() {
   const incidents: Incident[] = await fetchIncidents();
   incidents.sort((a, b) => {
-    if (a.identified < b.identified) {
+    if (a.start < b.start) {
       return 1;
     }
-    if (a.identified > b.identified) {
+    if (a.start > b.start) {
       return -1;
     }
     return 0;
   });
   const countMajor = incidents.filter(
-    (incident) =>
-      incident.severity === "major" &&
-      !incident.steps.find((step) => step.resolves)
+    (incident) => incident.severity === "major" && !incident.end !== null
   ).length;
   const countMinor = incidents.filter(
-    (incident) =>
-      incident.severity === "minor" &&
-      !incident.steps.find((step) => step.resolves)
+    (incident) => incident.severity === "minor" && !incident.end !== null
   ).length;
   const countPotential = incidents.filter(
-    (incident) =>
-      incident.severity === "potential" &&
-      !incident.steps.find((step) => step.resolves)
+    (incident) => incident.severity === "potential" && !incident.end !== null
   ).length;
 
   return (
@@ -68,7 +62,7 @@ async function fetchIncidents(): Promise<Incident[]> {
   }
 
   const json = await res.json();
-  const incidents = json.data.incidentList.items;
+  const incidents = json.data.lifeActivityList.items;
 
   return incidents;
 }
