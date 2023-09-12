@@ -69,10 +69,7 @@ export default function IncidentCard(props: IncidentCardProps) {
             </p>
           )}
           <ul className="steps steps-vertical opacity-70">
-            <li className="step">
-              Identified (
-              {new Date(start).toLocaleString("en-US", dateTimeOptions)})
-            </li>
+            <li className="step">Issue identified</li>
             {steps &&
               steps.map((step, index) => (
                 <li key={index} className="step">
