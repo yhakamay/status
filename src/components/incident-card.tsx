@@ -52,9 +52,7 @@ export default function IncidentCard(props: IncidentCardProps) {
         </div>
         <div className="collapse-content">
           {scope !== (null || undefined) && (
-            <p className="opacity-70">
-              Component(s) affected: {scope.join(", ")}
-            </p>
+            <p className="opacity-70">Scope: {scope.join(", ")}</p>
           )}
           {start !== (null || undefined) && (
             <p className="opacity-70">
