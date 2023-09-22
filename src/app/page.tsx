@@ -49,7 +49,7 @@ export default async function Home() {
 }
 
 async function fetchIncidents(): Promise<Incident[]> {
-  const res = await fetch(`${process.env.GRAPHQL_ENDPOINT}/incidents-all`, {
+  const res = await fetch(`${process.env.GRAPHQL_ENDPOINT}/incidents-all-v2`, {
     next: {
       revalidate: 60 * 60,
     },
@@ -62,7 +62,7 @@ async function fetchIncidents(): Promise<Incident[]> {
   }
 
   const json = await res.json();
-  const incidents = json.data.lifeActivityList.items;
+  const incidents = json.data.incidentList.items;
 
   return incidents;
 }
