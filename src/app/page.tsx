@@ -15,13 +15,14 @@ export default async function Home() {
     return 0;
   });
   const countMajor = incidents.filter(
-    (incident) => incident.severity === "major" && !incident.end !== null
+    (incident) => incident.severity === "major" && incident.resolved === false
   ).length;
   const countMinor = incidents.filter(
-    (incident) => incident.severity === "minor" && !incident.end !== null
+    (incident) => incident.severity === "minor" && incident.resolved === false
   ).length;
   const countPotential = incidents.filter(
-    (incident) => incident.severity === "potential" && !incident.end !== null
+    (incident) =>
+      incident.severity === "potential" && incident.resolved === false
   ).length;
 
   return (
