@@ -1,5 +1,4 @@
-import Link from "next/link";
-
+import Header from "@/components/header";
 import IncidentCard from "@/components/incident-card";
 import OverallStatus from "@/components/overall-status";
 
@@ -27,11 +26,7 @@ export default async function Home() {
 
   return (
     <>
-      <div className="navbar bg-base-100" role="navigation">
-        <Link href="/" className="btn btn-ghost normal-case text-xl">
-          Yusuke&apos;s Status
-        </Link>
-      </div>
+      <Header />
       <main className="flex min-h-screen max-w-screen-lg flex-col items-center p-6 md:p-24">
         {countMajor > 0 && <OverallStatus type="major" count={countMajor} />}
         {countMinor > 0 && <OverallStatus type="minor" count={countMinor} />}
@@ -49,7 +44,7 @@ export default async function Home() {
   );
 }
 
-async function fetchIncidents(): Promise<Incident[]> {
+export async function fetchIncidents(): Promise<Incident[]> {
   const res = await fetch(`${process.env.GRAPHQL_ENDPOINT}/incidents-all-v2`, {
     next: {
       revalidate: 60 * 60,
