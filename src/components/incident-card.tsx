@@ -19,9 +19,9 @@ export default function IncidentCard(props: IncidentCardProps) {
     <>
       <div className="card w-full bg-base-100 shadow-xl mt-4">
         <div className="card-body">
-          <div className="card-title flex justify-between pr-4">
+          <div className="flex justify-between pr-4">
             <div>
-              {title}
+              <span className="font-semibold text-lg">{title}</span>
               {resolved && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +50,6 @@ export default function IncidentCard(props: IncidentCardProps) {
               {severity}
             </span>
           </div>
-
           {scope !== (null || undefined) && (
             <p className="opacity-70">Scope: {scope.join(", ")}</p>
           )}
