@@ -44,7 +44,7 @@ export default async function Home() {
   );
 }
 
-export async function fetchIncidents(): Promise<Incident[]> {
+async function fetchIncidents(): Promise<Incident[]> {
   const res = await fetch(`${process.env.GRAPHQL_ENDPOINT}/incidents-all-v2`, {
     next: {
       revalidate: 60 * 60,
