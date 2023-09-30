@@ -1,4 +1,4 @@
-import FilterButton from "@/components/filter-button";
+import FilterBySeverity from "@/components/filter-by-severity";
 import Header from "@/components/header";
 import IncidentCardList from "@/components/incident-card-list";
 import OverallStatus from "@/components/overall-status";
@@ -37,7 +37,7 @@ export default async function Home() {
         )}
         <div className="w-full flex justify-end items-center gap-4">
           <ToggleOpenResolved />
-          <FilterButton />
+          <FilterBySeverity />
         </div>
         {incidents.length === 0 && (
           <OverallStatus type="operational" count={incidents.length} />

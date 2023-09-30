@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
-export default function FilterButton() {
+export default function FilterBySeverity() {
   const pathname = usePathname();
   const searchParams = useSearchParams()!;
 
