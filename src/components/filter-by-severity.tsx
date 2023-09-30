@@ -24,7 +24,18 @@ export default function FilterBySeverity() {
 
   return (
     <div className="dropdown dropdown-bottom dropdown-end">
-      <label tabIndex={0} className="btn btn-outline btn-sm m-1 font-normal">
+      <label
+        tabIndex={0}
+        className={`btn btn-sm m-1 font-normal ${
+          searchParams.get("severity") === "major"
+            ? "btn-error"
+            : searchParams.get("severity") === "minor"
+            ? "btn-warning"
+            : searchParams.get("severity") === "potential"
+            ? "btn-info"
+            : "btn-outline"
+        }`}
+      >
         Severity
         <svg
           xmlns="http://www.w3.org/2000/svg"
