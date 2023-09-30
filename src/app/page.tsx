@@ -1,3 +1,4 @@
+import FilterButton from "@/components/filter-button";
 import Header from "@/components/header";
 import IncidentCardList from "@/components/incident-card-list";
 import OverallStatus from "@/components/overall-status";
@@ -33,6 +34,9 @@ export default async function Home() {
         {countPotential > 0 && (
           <OverallStatus type="potential" count={countPotential} />
         )}
+        <div className="w-full flex justify-end">
+          <FilterButton />
+        </div>
         {incidents.length === 0 && (
           <OverallStatus type="operational" count={incidents.length} />
         )}
