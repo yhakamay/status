@@ -21,7 +21,7 @@ export default function FilterButton() {
 
   return (
     <div className="dropdown dropdown-bottom dropdown-end">
-      <label tabIndex={0} className="btn m-1">
+      <label tabIndex={0} className="btn btn-outline btn-sm m-1 font-normal">
         Severity
         <svg
           xmlns="http://www.w3.org/2000/svg"
