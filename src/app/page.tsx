@@ -1,5 +1,5 @@
 import Header from "@/components/header";
-import IncidentCard from "@/components/incident-card";
+import IncidentCardList from "@/components/incident-card-list";
 import OverallStatus from "@/components/overall-status";
 
 export default async function Home() {
@@ -36,9 +36,7 @@ export default async function Home() {
         {incidents.length === 0 && (
           <OverallStatus type="operational" count={incidents.length} />
         )}
-        {incidents.map((incident) => {
-          return <IncidentCard key={incident._path} incident={incident} />;
-        })}
+        <IncidentCardList incidents={incidents} />
       </main>
     </>
   );
