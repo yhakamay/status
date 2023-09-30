@@ -24,7 +24,13 @@ export default function IncidentCard(props: IncidentCardProps) {
             resolved
           </span>
         )}
-        <div className="card bg-base-100 shadow-md w-full">
+        <div
+          className={`card bg-base-100 w-full ${
+            resolved
+              ? "border border-success bg-success bg-opacity-10"
+              : "border border-current border-dotted"
+          }`}
+        >
           <Link href={`/incidents/${incident.slug}`}>
             <div className="card-body">
               <div className="flex justify-between pr-4">
