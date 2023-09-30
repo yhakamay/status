@@ -22,7 +22,7 @@ export default function ToggleOpenResolved() {
     [searchParams]
   );
 
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   return (
     <div className="form-control">
