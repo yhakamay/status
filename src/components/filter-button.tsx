@@ -10,9 +10,13 @@ export default function FilterButton() {
   const searchParams = useSearchParams()!;
 
   const createQueryString = useCallback(
-    (name: string, value: string) => {
+    (name: string, value: string | null) => {
       const params = new URLSearchParams(searchParams);
-      params.set(name, value);
+      if (value === null) {
+        params.delete(name);
+      } else {
+        params.set(name, value);
+      }
 
       return params.toString();
     },
@@ -38,7 +42,7 @@ export default function FilterButton() {
         className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
       >
         <li>
-          <Link href={pathname + "?" + createQueryString("severity", "all")}>
+          <Link href={pathname + "?" + createQueryString("severity", null)}>
             All
           </Link>
         </li>
