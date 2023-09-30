@@ -1,6 +1,8 @@
+import FilterBySeverity from "@/components/filter-by-severity";
 import Header from "@/components/header";
-import IncidentCard from "@/components/incident-card";
+import IncidentCardList from "@/components/incident-card-list";
 import OverallStatus from "@/components/overall-status";
+import ToggleOpenResolved from "@/components/toggle-open-resolved";
 
 export default async function Home() {
   const incidents: Incident[] = await fetchIncidents();
@@ -33,12 +35,14 @@ export default async function Home() {
         {countPotential > 0 && (
           <OverallStatus type="potential" count={countPotential} />
         )}
+        <div className="w-full flex justify-end items-center gap-4">
+          <ToggleOpenResolved />
+          <FilterBySeverity />
+        </div>
         {incidents.length === 0 && (
           <OverallStatus type="operational" count={incidents.length} />
         )}
-        {incidents.map((incident) => {
-          return <IncidentCard key={incident._path} incident={incident} />;
-        })}
+        <IncidentCardList incidents={incidents} />
       </main>
     </>
   );

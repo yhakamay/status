@@ -5,7 +5,7 @@ type Incident = {
   scope: string[];
   resolved: boolean;
   description: Description;
-  severity: string;
+  severity: "major" | "minor" | "potential";
   start: string;
   end: string | null;
   relatesTo: Incident[];

@@ -1,3 +1,10 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useCallback } from "react";
+
 export type OverallStatusProps = {
   type: "major" | "minor" | "potential" | "operational";
   count: number;
@@ -6,9 +13,24 @@ export type OverallStatusProps = {
 export default function OverallStatus(props: OverallStatusProps) {
   const { type, count } = props;
 
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams()!;
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+      params.delete("status");
+
+      return params.toString();
+    },
+    [searchParams]
+  );
+
   return (
     <>
-      <div
+      <Link
         className={`alert ${
           type === "major"
             ? "alert-error"
@@ -20,10 +42,15 @@ export default function OverallStatus(props: OverallStatusProps) {
             ? "alert-success"
             : ""
         } mb-4`}
+        href={
+          type !== "operational"
+            ? pathname + "?" + createQueryString("severity", type)
+            : pathname
+        }
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="stroke-current shrink-0 h-6 w-6"
+          className="stroke-current shrink-0 h-6 w-6 hidden sm:block"
           fill="none"
           viewBox="0 0 24 24"
         >
@@ -67,7 +94,16 @@ export default function OverallStatus(props: OverallStatusProps) {
         ) : (
           <span>All systems operational</span>
         )}
-      </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24"
+          viewBox="0 -960 960 960"
+          width="24"
+          className="hidden sm:block"
+        >
+          <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-134 0-244.5-72T61-462q-5-9-7.5-18.5T51-500q0-10 2.5-19.5T61-538q64-118 174.5-190T480-800q134 0 244.5 72T899-538q5 9 7.5 18.5T909-500q0 10-2.5 19.5T899-462q-64 118-174.5 190T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z" />
+        </svg>
+      </Link>
     </>
   );
 }
