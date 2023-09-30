@@ -1,12 +1,18 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function ToggleOpenResolved() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams()!;
+
+  const [checked, setChecked] = useState(false);
+  useEffect(() => {
+    const currentStatus = searchParams.get("status") ?? null;
+    setChecked(currentStatus === "open" ? true : false);
+  }, [searchParams]);
 
   const createQueryString = useCallback(
     (name: string, value: string | null) => {
@@ -21,8 +27,6 @@ export default function ToggleOpenResolved() {
     },
     [searchParams]
   );
-
-  const [checked, setChecked] = useState(false);
 
   return (
     <div className="form-control">
