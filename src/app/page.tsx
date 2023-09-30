@@ -2,6 +2,7 @@ import FilterButton from "@/components/filter-button";
 import Header from "@/components/header";
 import IncidentCardList from "@/components/incident-card-list";
 import OverallStatus from "@/components/overall-status";
+import ToggleOpenResolved from "@/components/toggle-open-resolved";
 
 export default async function Home() {
   const incidents: Incident[] = await fetchIncidents();
@@ -34,7 +35,8 @@ export default async function Home() {
         {countPotential > 0 && (
           <OverallStatus type="potential" count={countPotential} />
         )}
-        <div className="w-full flex justify-end">
+        <div className="w-full flex justify-end items-center gap-4">
+          <ToggleOpenResolved />
           <FilterButton />
         </div>
         {incidents.length === 0 && (
