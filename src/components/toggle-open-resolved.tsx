@@ -11,7 +11,7 @@ export default function ToggleOpenResolved() {
   const [checked, setChecked] = useState(false);
   useEffect(() => {
     const currentStatus = searchParams.get("status") ?? null;
-    setChecked(currentStatus === "open" ? true : false);
+    setChecked(currentStatus === "all" ? false : true);
   }, [searchParams]);
 
   const createQueryString = useCallback(
@@ -40,7 +40,7 @@ export default function ToggleOpenResolved() {
             router.push(
               pathname +
                 "?" +
-                createQueryString("status", checked ? null : "open")
+                createQueryString("status", checked ? "all" : null)
             );
             setChecked(!checked);
           }}

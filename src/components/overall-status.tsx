@@ -21,7 +21,7 @@ export default function OverallStatus(props: OverallStatusProps) {
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams);
       params.set(name, value);
-      params.set("status", "open");
+      params.delete("status");
 
       return params.toString();
     },

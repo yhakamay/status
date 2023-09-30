@@ -11,12 +11,7 @@ type IncidentCardListProps = {
 export default function IncidentCardList(props: IncidentCardListProps) {
   const { incidents } = props;
   const searchParams = useSearchParams();
-  const status =
-    searchParams.get("status") === "resolved"
-      ? true
-      : searchParams.get("status") === "open"
-      ? false
-      : null;
+  const status = searchParams.get("status") === "all" ? null : false;
   const severity =
     searchParams.get("severity") === "major"
       ? "major"
