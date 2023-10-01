@@ -1,5 +1,7 @@
 type Image = {
-  _path: string;
+  title: string | null;
+  description: string | null;
   width: number;
   height: number;
+  _dynamicUrl: string;
 };

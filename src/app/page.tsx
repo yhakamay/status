@@ -1,3 +1,4 @@
+import AnnouncementCard from "@/components/announcement-card";
 import FilterBySeverity from "@/components/filter-by-severity";
 import Header from "@/components/header";
 import IncidentCardList from "@/components/incident-card-list";
@@ -26,6 +27,17 @@ export default async function Home() {
       incident.severity === "potential" && incident.resolved === false
   ).length;
 
+  const announcements: Announcement[] = await fetchAnnouncements();
+  announcements.sort((a, b) => {
+    if (a.dateTime! < b.dateTime!) {
+      return 1;
+    }
+    if (a.dateTime! > b.dateTime!) {
+      return -1;
+    }
+    return 0;
+  });
+
   return (
     <>
       <Header />
@@ -43,6 +55,14 @@ export default async function Home() {
           <OverallStatus type="operational" count={incidents.length} />
         )}
         <IncidentCardList incidents={incidents} />
+        {announcements.map((announcement) => {
+          return (
+            <AnnouncementCard
+              announcement={announcement}
+              key={announcement.slug}
+            />
+          );
+        })}
       </main>
     </>
   );
@@ -65,4 +85,23 @@ async function fetchIncidents(): Promise<Incident[]> {
   const incidents = json.data.incidentList.items;
 
   return incidents;
+}
+
+async function fetchAnnouncements(): Promise<Announcement[]> {
+  const res = await fetch(`${process.env.GRAPHQL_ENDPOINT}/announcements-all`, {
+    next: {
+      revalidate: 60 * 60,
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error(
+      `Failed to fetch announcements: ${res.status} ${res.statusText}`
+    );
+  }
+
+  const json = await res.json();
+  const announcements = json.data.announcementList.items;
+
+  return announcements;
 }
