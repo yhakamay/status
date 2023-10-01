@@ -37,14 +37,14 @@ export default function AnnouncementCard(props: AnnouncementCardProps) {
               </p>
             )}
           </div>
-          <figure className="max-w-[12rem]">
+          <figure className="max-w-[10rem]">
             <Image
               src={`https://${process.env.AEM_HOSTNAME}${primaryImage?._dynamicUrl}`}
               alt={primaryImage?.description ?? ""}
               title={primaryImage?.title ?? ""}
               width={primaryImage?.width}
               height={primaryImage?.height}
-              layout="responsive"
+              className="hidden md:block"
             />
           </figure>
         </div>
