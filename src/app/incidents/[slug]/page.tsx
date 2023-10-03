@@ -30,7 +30,7 @@ export default async function Details({
   return (
     <>
       <Header />
-      <main className="flex min-h-screen max-w-screen-lg flex-col items-start p-6 md:p-24">
+      <main className="flex max-w-screen-lg flex-col items-start p-6 md:p-24">
         <div className="flex justify-between pr-4">
           <div>
             <h1 className="font-semibold text-xl inline">{title}</h1>
