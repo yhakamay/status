@@ -26,7 +26,7 @@ export default async function AnnouncementDetails({
   } satisfies Intl.DateTimeFormatOptions;
 
   return (
-    <main className="flex min-h-screen max-w-screen-lg flex-col items-start p-6 md:p-24">
+    <main className="flex max-w-screen-lg flex-col items-start p-6 md:p-24">
       <div className="flex justify-between items-baseline w-full">
         <h1 className="font-semibold text-xl inline">{title}</h1>
         {dateTime && (

@@ -38,7 +38,7 @@ export default async function Home() {
   });
 
   return (
-    <main className="flex min-h-screen max-w-screen-lg flex-col items-center p-6 md:p-24">
+    <main className="flex max-w-screen-lg flex-col items-center p-6 md:p-24">
       {countMajor > 0 && <OverallStatus type="major" count={countMajor} />}
       {countMinor > 0 && <OverallStatus type="minor" count={countMinor} />}
       {countPotential > 0 && (
