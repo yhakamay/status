@@ -1,6 +1,5 @@
 import AnnouncementCard from "@/components/announcement-card";
 import FilterBySeverity from "@/components/filter-by-severity";
-import Header from "@/components/header";
 import IncidentCardList from "@/components/incident-card-list";
 import OverallStatus from "@/components/overall-status";
 import ToggleOpenResolved from "@/components/toggle-open-resolved";
@@ -39,32 +38,29 @@ export default async function Home() {
   });
 
   return (
-    <>
-      <Header />
-      <main className="flex max-w-screen-lg flex-col items-center p-6 md:p-24">
-        {countMajor > 0 && <OverallStatus type="major" count={countMajor} />}
-        {countMinor > 0 && <OverallStatus type="minor" count={countMinor} />}
-        {countPotential > 0 && (
-          <OverallStatus type="potential" count={countPotential} />
-        )}
-        <div className="w-full flex justify-end items-center gap-4">
-          <ToggleOpenResolved />
-          <FilterBySeverity />
-        </div>
-        {incidents.length === 0 && (
-          <OverallStatus type="operational" count={incidents.length} />
-        )}
-        <IncidentCardList incidents={incidents} />
-        {announcements.map((announcement) => {
-          return (
-            <AnnouncementCard
-              announcement={announcement}
-              key={announcement.slug}
-            />
-          );
-        })}
-      </main>
-    </>
+    <main className="flex max-w-screen-lg flex-col items-center p-6 md:p-24">
+      {countMajor > 0 && <OverallStatus type="major" count={countMajor} />}
+      {countMinor > 0 && <OverallStatus type="minor" count={countMinor} />}
+      {countPotential > 0 && (
+        <OverallStatus type="potential" count={countPotential} />
+      )}
+      <div className="w-full flex justify-end items-center gap-4">
+        <ToggleOpenResolved />
+        <FilterBySeverity />
+      </div>
+      {incidents.length === 0 && (
+        <OverallStatus type="operational" count={incidents.length} />
+      )}
+      <IncidentCardList incidents={incidents} />
+      {announcements.map((announcement) => {
+        return (
+          <AnnouncementCard
+            announcement={announcement}
+            key={announcement.slug}
+          />
+        );
+      })}
+    </main>
   );
 }
 
